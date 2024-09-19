@@ -85,6 +85,7 @@ public class Grid<TGridObject> {
         y = Mathf.FloorToInt((worldPosition - originPosition).y / cellSize);
     }
 
+
     public void SetGridObject(int x, int y, TGridObject value) {
         if (x >= 0 && y >= 0 && x < width && y < height) {
             gridArray[x, y] = value;

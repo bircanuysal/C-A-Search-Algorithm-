@@ -30,9 +30,6 @@ public class UnitBasePlacer : MonoBehaviour
         int objectWidth = unitWidth;
         int objectHeight = unitHeight;
 
-        // Fare konumundan grid konumunu hesapla
-        //int snappedX = Mathf.FloorToInt(mousePosition.x / cellSize);
-        //int snappedY = Mathf.FloorToInt(mousePosition.y / cellSize);
         int snappedX;
         int snappedY;
         Vector3 mouseWorldPosition = UtilsClass.GetMouseWorldPosition();
