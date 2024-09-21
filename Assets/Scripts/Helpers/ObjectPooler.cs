@@ -5,11 +5,7 @@ using UnityEngine;
 
 public enum PoolableObjectTypes
 {
-    InfantryBarracks,
-    HeavyBarracks,
-    SniperBarracks,
-    PowerPlant,
-    SoldierUnit,
+    Build,
     None,
 }
 [System.Serializable]

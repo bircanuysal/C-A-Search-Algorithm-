@@ -11,7 +11,7 @@ public class Unit : MonoBehaviour , IUnit , IObjectPoolable
 
     private string _buildName;
 
-    private Image _image;
+    private Sprite _image;
 
     private int _health;
 
@@ -24,8 +24,9 @@ public class Unit : MonoBehaviour , IUnit , IObjectPoolable
     public UnitType unitType
     {
         get => _unitType;
+        set => _unitType = value;
     }
-    public Image image
+    public Sprite image
     {
         get => _image;
         set => _image = value;
@@ -51,6 +52,10 @@ public class Unit : MonoBehaviour , IUnit , IObjectPoolable
         set => _poolableObjectTypes = value;
     }
 
+    protected virtual void Start()
+    {
+        
+    }
     public void OnReturnToPool()
     {
         

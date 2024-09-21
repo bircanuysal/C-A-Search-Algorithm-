@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class GameManager : LocalSingleton<GameManager>
 {
-    [SerializeField] private MapManager mapManager;
-    public MapManager MapManager { get { return mapManager; } }
+    [SerializeField]
+    private MapManager _mapManager;
 
+    public MapManager mapManager { get { return _mapManager; } }
 
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private UnitManager _buildManager;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public UnitManager buildManager { get { return _buildManager; } }
+
+    private float _spriteScaleRate = 2;
+    public float spriteScaleRate {  get { return _spriteScaleRate; } }
 }

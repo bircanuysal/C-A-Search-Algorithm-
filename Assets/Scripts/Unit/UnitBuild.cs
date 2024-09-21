@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static EventManager;
 
-public class UnitBuild : Unit , IUnitBuild
+public class UnitBuild : Unit, IUnitBuild
 {
 
     private string _buildName;
@@ -28,10 +28,12 @@ public class UnitBuild : Unit , IUnitBuild
         get => _canProduceSoldiers;
         set => _canProduceSoldiers = value;
     }
-
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         InitializeBuild();
+        SetSprite();
+        ApplySize();
     }
     private void OnEnable()
     {
@@ -43,7 +45,7 @@ public class UnitBuild : Unit , IUnitBuild
     }
     private void InitializeBuild()
     {
-        var matchedBuild = BuildManager.Instance.Builds.FirstOrDefault(b => b.type == unitType);
+        var matchedBuild = UnitManager.Instance.Units.FirstOrDefault(b => b.type == unitType);
         if (matchedBuild.type != UnitType.None)
         {
             buildName = matchedBuild.name;
@@ -60,6 +62,20 @@ public class UnitBuild : Unit , IUnitBuild
         canMove = false;
         selectable = false;
     }
+    private void SetSprite()
+    {
+        SpriteRenderer spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = image; // Direk SpriteRenderer üzerindeki sprite'ý güncelleyin.
+    }
+    private void ApplySize()
+    {
+        float scaleRate = GameManager.Instance.spriteScaleRate;
+        Vector3 newSize = new Vector3(size.x, size.y, 1);
+        newSize.x *= scaleRate;
+        newSize.y *= scaleRate;
+        transform.GetChild(0).transform.localScale = newSize;
+    }
+
     private void Build()
     {
         //Extensions.Debug(gameObject);

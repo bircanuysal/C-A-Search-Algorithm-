@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public interface IPlaceable
@@ -27,7 +28,8 @@ public class UnitBuildPlacer : MonoBehaviour, IPlaceable, IColorChangeable, IAni
     private Tween fadeTween;
     private Color baseColor;
     private bool _canBuild;
-    List<Vector2> buildedGrids = new();
+    private List<Vector2> buildedGrids = new();
+    private bool onDataUploaded = false;
     public bool canBuild
     {
         get { return _canBuild; }
@@ -44,17 +46,37 @@ public class UnitBuildPlacer : MonoBehaviour, IPlaceable, IColorChangeable, IAni
     private void Start()
     {
         mapManager = MapManager.Instance;
+        StartCoroutine(WaitToDataAndInitialize());
+    }
+    private IEnumerator WaitToDataAndInitialize()
+    {
+        yield return new WaitUntil(() => GetComponent<UnitBuild>() != null);
 
         GetMySize();
-        FindAllSpriteRenderersInChildren();
+
+        yield return StartCoroutine(FindAllSpriteRenderersInChildren());
+
         PlayAnimation();
 
         if (spriteRenderers.Length > 0)
         {
             baseColor = spriteRenderers[0].color;
         }
+        onDataUploaded = true;
     }
 
+    private IEnumerator FindAllSpriteRenderersInChildren()
+    {
+        while (true)
+        {
+            spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+            if (spriteRenderers.Length > 0)
+            {
+                break;
+            }
+            yield return null;
+        }
+    }
     private void OnEnable()
     {
         EventManager.Build.UnitBuild.AddListener(Build);
@@ -67,7 +89,8 @@ public class UnitBuildPlacer : MonoBehaviour, IPlaceable, IColorChangeable, IAni
 
     private void Update()
     {
-        SnapToCell();
+        if (onDataUploaded)
+            SnapToCell();
     }
 
     private void GetMySize()
@@ -77,13 +100,8 @@ public class UnitBuildPlacer : MonoBehaviour, IPlaceable, IColorChangeable, IAni
         unitHeight = (int)(unitBuild.size.y);
     }
 
-    private void FindAllSpriteRenderersInChildren()
-    {
-        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-    }
-
     public bool SnapToCell()
-    {
+    {       
         buildedGrids.Clear();
         Grid<PathNode> grid = mapManager.Pathfinding.GetGrid();
         float cellSize = grid.GetCellSize();
@@ -125,7 +143,6 @@ public class UnitBuildPlacer : MonoBehaviour, IPlaceable, IColorChangeable, IAni
                          0);
         transform.position = snappedPosition;
         canBuild = true;
-
         for (int x = snappedX; x < snappedX + objectWidth; x++)
         {
             for (int y = snappedY; y < snappedY + objectHeight; y++)

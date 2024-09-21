@@ -7,36 +7,30 @@ using UnityEngine.UI;
 
 public enum UnitType
 {
-    InfantryBarracks,
-    HeavyBarracks,
-    SniperBarracks,
+    Barracks,
     PowerPlant,
+    MachineGunBuild,
     SoldierUnit,
     None
 }
 [Serializable]
-public struct Builds
+public struct Units
 {
     public UnitType type;
     public string name;
-    public Image image;
+    public Sprite image;
     public Vector2 size;
     public int health;
     public bool canSpawnSoldier;
 }
-public class BuildManager : LocalSingleton<BuildManager>
+public class UnitManager : LocalSingleton<UnitManager>
 {
-    [SerializeField] Builds[] builds;
+    [SerializeField] Units[] units;
 
-    public Builds[] Builds {  get { return builds; } }
+    public Units[] Units {  get { return units; } }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Vector3 mousePos = Extensions.GetMouseWorldPosition();
-            UnitFactory.CreateBuild(PoolableObjectTypes.InfantryBarracks, mousePos);
-        }
         if (Input.GetMouseButtonDown(0))
         {
             EventManager.Build.UnitBuild.Invoke();

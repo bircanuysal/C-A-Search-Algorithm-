@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BuildSpawnButton : MonoBehaviour
 {
-    public PoolableObjectTypes poolableObjectTypes;
+    public UnitType unitType;
     private Button button;
 
     [SerializeField]
@@ -22,7 +22,7 @@ public class BuildSpawnButton : MonoBehaviour
     private void OnButtonClick()
     {
         Vector3 mousePos = Extensions.GetMouseWorldPosition();
-        UnitFactory.CreateBuild(poolableObjectTypes, mousePos);
+        UnitFactory.CreateBuild(unitType, mousePos);
         StartCoroutine(FillImage());
     }
     IEnumerator FillImage()

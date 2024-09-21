@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public interface IUnit
 {
     public UnitType unitType { get; }
-    public Image image { get; set; }
+    public Sprite image { get; set; }
     public int health { get; set; }
     public bool selectable {  get; set; }
     public bool canMove {  get; set; }

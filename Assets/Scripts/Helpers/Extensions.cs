@@ -208,7 +208,10 @@ public static class Extensions
     {
         return new Vector2(vector.x, y);
     }
-
+    public static Vector3 SetSize(this Vector2 vector, float z = 1f)
+    {
+        return new Vector3(vector.x, vector.y, z);
+    }
     public static T GetRandomElement<T>(this IList<T> list)
     {
         return list[list.GetRandomIndex()];
