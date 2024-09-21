@@ -33,7 +33,7 @@ public class UnitManager : LocalSingleton<UnitManager>
     {
         if (Input.GetMouseButtonDown(0))
         {
-            EventManager.Build.UnitBuild.Invoke();
+            EventManager.BuildsEvents.UnitBuild.Invoke();
         }
     }
 }

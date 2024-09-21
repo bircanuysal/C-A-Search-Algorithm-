@@ -37,11 +37,11 @@ public class UnitBuild : Unit, IUnitBuild
     }
     private void OnEnable()
     {
-        EventManager.Build.UnitBuild.AddListener(Build);
+        EventManager.BuildsEvents.UnitBuild.AddListener(Build);
     }
     private void OnDisable()
     {
-        EventManager.Build.UnitBuild.RemoveListener(Build);
+        EventManager.BuildsEvents.UnitBuild.RemoveListener(Build);
     }
     private void InitializeBuild()
     {

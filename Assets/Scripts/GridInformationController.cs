@@ -13,11 +13,11 @@ public class GridInformationController : MonoBehaviour
     private bool builded;
     private void OnEnable()
     {
-        EventManager.Build.BuildedGrid.AddListener(SetBuilded);
+        EventManager.BuildsEvents.BuildedGrid.AddListener(SetBuilded);
     }
     private void OnDisable()
     {
-        EventManager.Build.BuildedGrid.RemoveListener(SetBuilded);
+        EventManager.BuildsEvents.BuildedGrid.RemoveListener(SetBuilded);
     }
 
     void SetBuilded(List<Vector2> gridPoses)

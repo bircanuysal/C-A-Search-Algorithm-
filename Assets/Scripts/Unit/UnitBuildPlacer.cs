@@ -79,12 +79,12 @@ public class UnitBuildPlacer : MonoBehaviour, IPlaceable, IColorChangeable, IAni
     }
     private void OnEnable()
     {
-        EventManager.Build.UnitBuild.AddListener(Build);
+        EventManager.BuildsEvents.UnitBuild.AddListener(Build);
     }
 
     private void OnDisable()
     {
-        EventManager.Build.UnitBuild.RemoveListener(Build);
+        EventManager.BuildsEvents.UnitBuild.RemoveListener(Build);
     }
 
     private void Update()
@@ -220,7 +220,7 @@ public class UnitBuildPlacer : MonoBehaviour, IPlaceable, IColorChangeable, IAni
                 grid.GetGridObject(x, y).isWalkable = false;
             }
         }
-        EventManager.Build.BuildedGrid.Invoke(buildedGrids);
+        EventManager.BuildsEvents.BuildedGrid.Invoke(buildedGrids);
 
         Destroy(this);
     }
