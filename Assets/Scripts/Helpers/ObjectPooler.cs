@@ -4,7 +4,12 @@ using System.Linq;
 using UnityEngine;
 
 public enum PoolableObjectTypes
-{   
+{
+    InfantryBarracks,
+    HeavyBarracks,
+    SniperBarracks,
+    PowerPlant,
+    SoldierUnit,
     None,
 }
 [System.Serializable]
@@ -67,6 +72,17 @@ public class ObjectPooler : MonoBehaviour
         {
             pooledObject.transform.SetParent(parentObj);
             pooledObject.transform.localPosition = Vector3.zero;
+        }
+
+        return pooledObject;
+    }
+    public GameObject GetPooledObject(PoolableObjectTypes type, Vector3 spawnpos, bool setObjActive = true)
+    {
+        GameObject pooledObject = GetPooledObject(type, setObjActive);
+
+        if (pooledObject != null)
+        {
+            pooledObject.transform.position = spawnpos;
         }
 
         return pooledObject;

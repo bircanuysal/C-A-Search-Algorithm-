@@ -14,7 +14,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using V_AnimationSystem;
-using CodeMonkey.Utils;
 
 public class CharacterPositionMovementHandler : MonoBehaviour {
 
@@ -38,7 +37,7 @@ public class CharacterPositionMovementHandler : MonoBehaviour {
         unitSkeleton.Update(Time.deltaTime);
             
         if (Input.GetMouseButtonDown(0)) {
-            SetTargetPosition(UtilsClass.GetMouseWorldPosition());
+            SetTargetPosition(Extensions.GetMouseWorldPosition());
         }
     }
 

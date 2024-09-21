@@ -15,7 +15,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using CodeMonkey.Utils;
 
 public class PathfindingDebugStepVisual : LocalSingleton<PathfindingDebugStepVisual> 
 {
@@ -73,13 +72,13 @@ public class PathfindingDebugStepVisual : LocalSingleton<PathfindingDebugStepVis
                     Transform visualNode = visualNodeArray[tmpX, tmpY];
                     SetupVisualNode(visualNode, gCost, hCost, fCost);
 
-                    Color backgroundColor = UtilsClass.GetColorFromString("636363");
+                    Color backgroundColor = Extensions.GetColorFromString("636363");
 
                     if (isInClosedList) {
                         backgroundColor = new Color(1, 0, 0);
                     }
                     if (isInOpenList) {
-                        backgroundColor = UtilsClass.GetColorFromString("009AFF");
+                        backgroundColor = Extensions.GetColorFromString("009AFF");
                     }
                     if (isCurrent) {
                         backgroundColor = new Color(0, 1, 0);
@@ -118,7 +117,7 @@ public class PathfindingDebugStepVisual : LocalSingleton<PathfindingDebugStepVis
                     if (isInPath) {
                         backgroundColor = new Color(0, 1, 0);
                     } else {
-                        backgroundColor = UtilsClass.GetColorFromString("636363");
+                        backgroundColor = Extensions.GetColorFromString("636363");
                     }
 
                     visualNode.Find("sprite").GetComponent<SpriteRenderer>().color = backgroundColor;

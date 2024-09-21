@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using CodeMonkey.Utils;
 
 public class CharacterMovementHandler : MonoBehaviour {
 
@@ -14,12 +13,12 @@ public class CharacterMovementHandler : MonoBehaviour {
         HandleMovement();
         if (Input.GetMouseButtonDown(0))
         {
-            SetTargetPosition(UtilsClass.GetMouseWorldPosition());
+            SetTargetPosition(Extensions.GetMouseWorldPosition());
         }
         if (Input.GetMouseButtonDown(1))
         {
             Pathfinding pathfinding = MapManager.Instance.Pathfinding;
-            Vector3 mouseWorldPosition = UtilsClass.GetMouseWorldPosition();
+            Vector3 mouseWorldPosition = Extensions.GetMouseWorldPosition();
             pathfinding.GetGrid().GetXY(mouseWorldPosition, out int x, out int y);
             pathfinding.GetNode(x, y).SetIsWalkable(!pathfinding.GetNode(x, y).isWalkable);
         }

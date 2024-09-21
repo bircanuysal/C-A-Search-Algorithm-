@@ -43,5 +43,8 @@ public class MapManager : LocalSingleton<MapManager>
         GameObject visualNodeTransform = Instantiate(cellPrefab, position, Quaternion.identity);        
         return visualNodeTransform;
     }
-
+    public GameObject GetVisualNode(int x, int y)
+    {
+        return visualNodeArray[x, y];
+    }
 }

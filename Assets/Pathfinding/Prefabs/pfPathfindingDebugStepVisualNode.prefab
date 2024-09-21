@@ -190,7 +190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6536783764682816104}
-  - component: {fileID: 1129199244404721658}
+  - component: {fileID: 6148712517600405818}
   m_Layer: 0
   m_Name: pfPathfindingDebugStepVisualNode
   m_TagString: Untagged
@@ -206,7 +206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715979902215849131}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.2181263, y: 6.3290763, z: -4.124274}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -217,7 +217,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1129199244404721658
+--- !u!114 &6148712517600405818
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,21 +226,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 715979902215849131}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7bb9acb2cffc5f45abddc238a0ad9b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ecc18125206dfd4d8ad5f33816392e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PositionIntKeys: []
-  m_PositionIntValues: 
-  m_PositionStringKeys: []
-  m_PositionStringValues: []
-  m_PositionFloatKeys: []
-  m_PositionFloatValues: []
-  m_PositionDoubleKeys: []
-  m_PositionDoubleValues: []
-  m_PositionObjectKeys: []
-  m_PositionObjectValues: []
-  m_PositionColorKeys: []
-  m_PositionColorValues: []
+  walkableColor: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 0}
+  nonWalkableColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 0.5882353}
 --- !u!1 &1610382290851544562
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,7 +667,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -5
   m_Sprite: {fileID: 21300000, guid: 4272d5110e0059c4a8bf4ac7e1a8f2e6, type: 3}
-  m_Color: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
+  m_Color: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
