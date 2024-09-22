@@ -6,6 +6,7 @@ using UnityEngine;
 public enum PoolableObjectTypes
 {
     Build,
+    Soldier,
     None,
 }
 [System.Serializable]

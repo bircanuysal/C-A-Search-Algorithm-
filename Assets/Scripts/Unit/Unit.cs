@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,9 +54,25 @@ public class Unit : MonoBehaviour , IUnit , IObjectPoolable
         set => _poolableObjectTypes = value;
     }
 
+    protected MapManager mapManager = MapManager.Instance;
     protected virtual void Start()
     {
-        
+        Initialize();
+        SetSprite();
+    }
+    private void OnEnable()
+    {
+        EventManager.ClickEvents.OnMouseClicked.AddListener(SelectedUnit);
+    }
+    private void OnDisable()
+    {
+        EventManager.ClickEvents.OnMouseClicked.RemoveListener(SelectedUnit);
+    }
+    protected virtual void Initialize()
+    {
+    }
+    protected virtual void SetSprite()
+    {
     }
     public void OnReturnToPool()
     {
@@ -64,5 +82,9 @@ public class Unit : MonoBehaviour , IUnit , IObjectPoolable
     public PoolableObjectTypes PoolableObjectType()
     {
         return poolableObjectTypes;
+    }
+
+    protected virtual void SelectedUnit(GameObject gameObject)
+    {
     }
 }

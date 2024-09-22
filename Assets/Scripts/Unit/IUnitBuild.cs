@@ -9,5 +9,7 @@ public interface IUnitBuild
     public Vector2 size { get; set; }
     public bool canProduceSoldiers { get; set; }
 
+    public Vector3 spawnPos { get; set; }
+
 }
 

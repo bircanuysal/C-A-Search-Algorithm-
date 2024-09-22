@@ -16,4 +16,11 @@ public static class EventManager
         public static readonly UnityEvent<float> TakeDamege = new();
         public static readonly UnityEvent UnitOnDie = new();
     }
+
+    public struct ClickEvents
+    {
+        public static readonly UnityEvent<GameObject> OnMouseClicked = new();
+        public static readonly UnityEvent<Units> OpenInformationUi = new();
+        public static readonly UnityEvent CloseInformationUi = new();
+    }
 }

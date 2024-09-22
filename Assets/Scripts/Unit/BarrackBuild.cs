@@ -12,5 +12,8 @@ public class BarrackBuild : UnitBuild
     {
         base.Start();
     }
-
+    protected override void Build()
+    {
+        base.Build();
+    }
 }

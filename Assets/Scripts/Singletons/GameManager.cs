@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class GameManager : LocalSingleton<GameManager>
 {
-    [SerializeField]
-    private MapManager _mapManager;
-
-    public MapManager mapManager { get { return _mapManager; } }
-
-    [SerializeField]
-    private UnitManager _buildManager;
-
-    public UnitManager buildManager { get { return _buildManager; } }
-
     private float _spriteScaleRate = 2;
-    public float spriteScaleRate {  get { return _spriteScaleRate; } }
+    public float spriteScaleRate => _spriteScaleRate;
+
+    private UnitInGameController _unitInGameController;
+
+    private void Start()
+    {
+        _unitInGameController = new UnitInGameController();
+    }
+
+    private void Update()
+    {
+        _unitInGameController.HandleInput();
+    }
+    public GameObject GetSelectedUnitGameObject()
+    {
+        return _unitInGameController.selectedUnitGameObject;
+    }
+    public void SetSelectedUnitGameObject(GameObject obj)
+    {
+        _unitInGameController.selectedUnitGameObject = obj;
+    }
 }

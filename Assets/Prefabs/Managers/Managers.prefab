@@ -126,7 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mapManager: {fileID: 5386214118886401312}
-  _buildManager: {fileID: 5386214119501087951}
+  _unitManager: {fileID: 5386214119501087951}
+  _soldierDamages: {fileID: 11400000, guid: 1ea9a51ca78568644b81fa918ccb313d, type: 2}
 --- !u!1 &5386214119501087945
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +139,7 @@ GameObject:
   - component: {fileID: 5386214119501087950}
   - component: {fileID: 5386214119501087951}
   m_Layer: 0
-  m_Name: BuildsManager
+  m_Name: UnitsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,10 +192,22 @@ MonoBehaviour:
     health: 25
     canSpawnSoldier: 0
   - type: 3
-    name: Soldier
-    image: {fileID: 21300000, guid: 3614c2790347ee344a486b34d35ea641, type: 3}
+    name: Infantry Soldier
+    image: {fileID: 21300000, guid: e26b6ebec7d99254d8539046ad9d943e, type: 3}
     size: {x: 1, y: 1}
-    health: 100
+    health: 10
+    canSpawnSoldier: 0
+  - type: 4
+    name: Sword Soldier
+    image: {fileID: 21300000, guid: 7ab3e6653974a8447b0887bd40707e2b, type: 3}
+    size: {x: 1, y: 1}
+    health: 10
+    canSpawnSoldier: 0
+  - type: 5
+    name: Archer Soldier
+    image: {fileID: 21300000, guid: db49f9c2ff5632a4bbd27a840b7d7ec3, type: 3}
+    size: {x: 1, y: 1}
+    health: 10
     canSpawnSoldier: 0
 --- !u!1 &5386214120298143195
 GameObject:
@@ -243,4 +256,7 @@ MonoBehaviour:
   pools:
   - type: 0
     prefab: {fileID: 8015491910074459686, guid: 7805d8b4cd30edc4dbd65276a10b7890, type: 3}
+    size: 20
+  - type: 1
+    prefab: {fileID: 9115245974322099150, guid: 7f4a4bc98b77ae34383986a242cf03ba, type: 3}
     size: 20

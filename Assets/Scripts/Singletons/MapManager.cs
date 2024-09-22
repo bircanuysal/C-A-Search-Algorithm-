@@ -11,7 +11,11 @@ public class MapManager : LocalSingleton<MapManager>
 
     private List<GameObject> visualNodeList = new();
 
-    private GameObject[,] visualNodeArray;
+    private GameObject[,] _visualNodeArray;
+    public GameObject[,] visualNodeArray
+    {
+        get { return _visualNodeArray; }
+    }
 
     [SerializeField]
     private GameObject cellPrefab;
@@ -25,7 +29,7 @@ public class MapManager : LocalSingleton<MapManager>
     }
     public void Setup(Grid<PathNode> grid)
     {
-        visualNodeArray = new GameObject[grid.GetWidth(), grid.GetHeight()];
+        _visualNodeArray = new GameObject[grid.GetWidth(), grid.GetHeight()];
 
         for (int x = 0; x < grid.GetWidth(); x++)
         {

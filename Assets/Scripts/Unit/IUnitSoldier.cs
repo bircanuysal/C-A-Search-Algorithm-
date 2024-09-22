@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IUnitSoldier : MonoBehaviour
+public interface IUnitSoldier
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int attackDamageValue { get; set; }
+    public void PerformAttack();
+}
+public interface ISoldierState
+{
+    void Attack(IUnitSoldier soldier);
 }

@@ -10,7 +10,9 @@ public enum UnitType
     Barracks,
     PowerPlant,
     MachineGunBuild,
-    SoldierUnit,
+    InfantrySoldier,
+    SwordSoldier,
+    ArcherSoldier,
     None
 }
 [Serializable]

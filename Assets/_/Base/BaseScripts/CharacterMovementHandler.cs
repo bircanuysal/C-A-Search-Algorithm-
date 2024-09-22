@@ -8,19 +8,15 @@ public class CharacterMovementHandler : MonoBehaviour {
     private List<Vector3> pathVectorList;
     private bool isMoving = false;
     public bool IsMoving {  get { return isMoving; } }
+
+    [SerializeField]
+    private GameObject shadow;
     private void Update()
     {
         HandleMovement();
         if (Input.GetMouseButtonDown(0))
         {
-            SetTargetPosition(Extensions.GetMouseWorldPosition());
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            Pathfinding pathfinding = MapManager.Instance.Pathfinding;
-            Vector3 mouseWorldPosition = Extensions.GetMouseWorldPosition();
-            pathfinding.GetGrid().GetXY(mouseWorldPosition, out int x, out int y);
-            pathfinding.GetNode(x, y).SetIsWalkable(!pathfinding.GetNode(x, y).isWalkable);
+            //SetTargetPosition(Extensions.GetMouseWorldPosition());
         }
     }
     
@@ -68,5 +64,8 @@ public class CharacterMovementHandler : MonoBehaviour {
             pathVectorList.RemoveAt(0);
         }
     }
-
+    public void ShadowControl(bool open)
+    {
+        shadow.SetActive(open);
+    }
 }

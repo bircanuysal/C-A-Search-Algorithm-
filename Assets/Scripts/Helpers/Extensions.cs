@@ -2,9 +2,11 @@ using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using ColorUtility = UnityEngine.ColorUtility;
 using Random = UnityEngine.Random;
 
 public static class Extensions
@@ -433,5 +435,19 @@ public static class Extensions
             alpha = Hex_to_Dec01(color.Substring(6, 2));
         }
         return new Color(red, green, blue, alpha);
+    }
+    public static GameObject RayCast()
+    {
+        Vector2 mousePosition = GetMouseWorldPosition();
+        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+        if (hit.collider != null)
+        {
+            GameObject clickedObject = hit.collider.gameObject;
+            return clickedObject;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
