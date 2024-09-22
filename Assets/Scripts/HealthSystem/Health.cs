@@ -21,7 +21,7 @@ public class Health : MonoBehaviour , IHealth
 
     private void Start()
     {
-        
+        maxHealth = GetComponent<Unit>().health;
     }
     private void OnEnable()
     {
@@ -34,11 +34,15 @@ public class Health : MonoBehaviour , IHealth
 
     public void TakeDamage(float damageValue)
     {
-        throw new System.NotImplementedException();
+        currentHealth -= damageValue;
+        if (currentHealth <= 0)
+        {
+            UnitOnDie();
+        }
     }
     public void UnitOnDie()
     {
-        throw new System.NotImplementedException();
+        EventManager.HealthsEvent.UnitOnDie.Invoke();
     }
 
 }

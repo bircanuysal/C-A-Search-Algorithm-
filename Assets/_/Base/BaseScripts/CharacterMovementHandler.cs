@@ -11,13 +11,11 @@ public class CharacterMovementHandler : MonoBehaviour {
 
     [SerializeField]
     private GameObject shadow;
+
+    private Vector3 targetPos;
     private void Update()
     {
         HandleMovement();
-        if (Input.GetMouseButtonDown(0))
-        {
-            //SetTargetPosition(Extensions.GetMouseWorldPosition());
-        }
     }
     
     private void HandleMovement() 
@@ -31,6 +29,10 @@ public class CharacterMovementHandler : MonoBehaviour {
                 float distanceBefore = Vector3.Distance(transform.position, targetPosition);
                 transform.position = transform.position + moveDir * speed * Time.deltaTime;
                 isMoving = true;
+                if (!GetTargetIsWalkable())
+                {
+                    StopMoving();
+                }
             } 
             else 
             {
@@ -42,7 +44,22 @@ public class CharacterMovementHandler : MonoBehaviour {
             }
         }
     }
-
+    private bool GetTargetIsWalkable()
+    {
+        MapManager mapManager = MapManager.Instance;
+        int targetX;
+        int targetY;
+        Grid<PathNode> grid = mapManager.Pathfinding.GetGrid();
+        grid.GetXY(targetPos, out targetX, out targetY);
+        if (grid.GetGridObject(targetX, targetY).isWalkable)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     private void StopMoving() 
     {
         isMoving = false;
@@ -57,6 +74,7 @@ public class CharacterMovementHandler : MonoBehaviour {
     public void SetTargetPosition(Vector3 targetPosition)
     {
         currentPathIndex = 0;
+        targetPos = targetPosition;
         pathVectorList = Pathfinding.Instance.FindPath(GetPosition(), targetPosition);
 
         if (pathVectorList != null && pathVectorList.Count > 1)

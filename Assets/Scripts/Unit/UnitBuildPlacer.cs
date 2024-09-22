@@ -103,6 +103,7 @@ public class UnitBuildPlacer : MonoBehaviour, IPlaceable, IColorChangeable, IAni
     public bool SnapToCell()
     {       
         buildedGrids.Clear();
+
         Grid<PathNode> grid = mapManager.Pathfinding.GetGrid();
         float cellSize = grid.GetCellSize();
 
@@ -112,20 +113,29 @@ public class UnitBuildPlacer : MonoBehaviour, IPlaceable, IColorChangeable, IAni
         int snappedX;
         int snappedY;
         Vector3 mouseWorldPosition = Extensions.GetMouseWorldPosition();
+
         mapManager.Pathfinding.GetGrid().GetXY(mouseWorldPosition, out snappedX, out snappedY);
 
+        Vector3 snappedPosition = new Vector3(snappedX * cellSize + (objectWidth * cellSize) / 2f,
+                         snappedY * cellSize + (objectHeight * cellSize) / 2f,
+                         0);
+        if (snappedX >= 0 && snappedX < grid.GetWidth() && snappedY >= 0 && snappedY < grid.GetHeight())
+        {
+            transform.position = snappedPosition;
+        }
+        
         if (snappedX + objectWidth > grid.GetWidth() || snappedY + objectHeight > grid.GetHeight())
         {
             canBuild = false;
             return false;
         }
-        for (int x = snappedX; x < snappedX + objectWidth; x++)
+        for (int x = snappedX; x < snappedX + objectWidth+1; x++)
         {
-            for (int y = snappedY; y < snappedY + objectHeight; y++)
+            for (int y = snappedY; y < snappedY + objectHeight+1; y++)
             {
                 if (grid.GetGridObject(x, y) != null)
                 {
-                    if (!grid.GetGridObject(x, y).isWalkable)
+                    if (!grid.GetGridObject(x, y).isBuildable)
                     {
                         canBuild = false;
                         return false;
@@ -138,10 +148,6 @@ public class UnitBuildPlacer : MonoBehaviour, IPlaceable, IColorChangeable, IAni
                 }
             }
         }
-        Vector3 snappedPosition = new Vector3(snappedX * cellSize + (objectWidth * cellSize) / 2f,
-                         snappedY * cellSize + (objectHeight * cellSize) / 2f,
-                         0);
-        transform.position = snappedPosition;
         canBuild = true;
         for (int x = snappedX; x < snappedX + objectWidth; x++)
         {
@@ -217,7 +223,19 @@ public class UnitBuildPlacer : MonoBehaviour, IPlaceable, IColorChangeable, IAni
         {
             for (int y = snappedY; y < snappedY + objectHeight; y++)
             {
-                grid.GetGridObject(x, y).isWalkable = false;
+                if (x >= 0 && x < grid.GetWidth() && y >= 0 && y < grid.GetHeight())
+                    grid.GetGridObject(x, y).isWalkable = false;
+            }
+        }
+
+        for (int x = snappedX; x < snappedX + objectWidth + 1; x++)
+        {
+            for (int y = snappedY; y < snappedY + objectHeight + 1; y++)
+            {
+                if (x >= 0 && x < grid.GetWidth() && y >= 0 && y < grid.GetHeight())
+                {
+                    grid.GetGridObject(x, y).isBuildable = false;
+                }
             }
         }
         EventManager.BuildsEvents.BuildedGrid.Invoke(buildedGrids);

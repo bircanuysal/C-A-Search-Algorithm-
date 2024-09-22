@@ -63,10 +63,12 @@ public class Unit : MonoBehaviour , IUnit , IObjectPoolable
     private void OnEnable()
     {
         EventManager.ClickEvents.OnMouseClicked.AddListener(SelectedUnit);
+        EventManager.HealthsEvent.UnitOnDie.AddListener(UnitOnDie);
     }
     private void OnDisable()
     {
         EventManager.ClickEvents.OnMouseClicked.RemoveListener(SelectedUnit);
+        EventManager.HealthsEvent.UnitOnDie.RemoveListener(UnitOnDie);
     }
     protected virtual void Initialize()
     {
@@ -74,9 +76,14 @@ public class Unit : MonoBehaviour , IUnit , IObjectPoolable
     protected virtual void SetSprite()
     {
     }
+
+    protected virtual void UnitOnDie()
+    {
+        OnReturnToPool();
+    }
     public void OnReturnToPool()
     {
-        
+        ObjectPooler.Instance.ReturnToPool(gameObject);
     }
 
     public PoolableObjectTypes PoolableObjectType()
